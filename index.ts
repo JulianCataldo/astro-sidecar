@@ -1,6 +1,7 @@
 import type { AstroIntegration } from 'astro';
 
 import path from 'node:path';
+import fs from 'node:fs';
 // import { detect } from 'detect-package-manager';
 import { execa } from 'execa';
 
@@ -17,7 +18,7 @@ interface Settings {
 
 /* —————————————————————————————————————————————————————————————————————————— */
 
-/* HACK: Debounce double server setup (Astro bug?) */
+// HACK: Debounce double server setup (Astro bug?)
 let created = false;
 
 export const integration = ({
@@ -27,7 +28,11 @@ export const integration = ({
 	name: 'sidecar',
 
 	hooks: {
-		'astro:server:setup': async ({ server }) => {
+		'astro:server:setup': async (/* { server } */) => {
+			if (!entryPoint) throw Error('Please setup the sidecar entrypoint.');
+			if (!fs.statSync(entryPoint))
+				throw Error(`Incorrect path: ${entryPoint}`);
+
 			if (created) return;
 			created = true;
 
@@ -45,8 +50,8 @@ export const integration = ({
 				],
 				{
 					all: true,
-					env: { FORCE_COLOR: String(true) },
 					stdio: 'inherit',
+					env: { FORCE_COLOR: String(true) },
 				},
 			); //.pipeAll?.(process.stdout);
 

@@ -85,7 +85,7 @@ There might be a way to streamline this part furthermore (e.g. leveraging build 
 
 You might want to spin-up a Fastify / Koa / Express / _you name it_, server framework,
 for example you want to use a specific library for only made for it. \
-Or you may want to add a bit of realism by using a different server oriigin during dev., like it would in the wild.
+Or you may want to add a bit of realism by using a different server origin during dev., like it would in the wild.
 
 ### Additional / exotic bundlers
 
