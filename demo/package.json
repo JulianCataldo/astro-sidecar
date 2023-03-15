@@ -12,14 +12,12 @@
 	},
 	"dependencies": {
 		"@fastify/cors": "^8.2.1",
-		"@types/ws": "^8.5.4",
 		"astro": "^2.0.18",
 		"astro-sidecar": "latest",
 		"fastify": "^4.14.1",
 		"kleur": "^4.1.5",
 		"socket.io": "^4.6.1",
 		"socket.io-client": "^4.6.1",
-		"ws": "^8.13.0",
 		"wscat": "^5.2.0"
 	},
 	"devDependencies": {

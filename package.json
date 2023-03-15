@@ -1,6 +1,6 @@
 {
 	"name": "astro-sidecar",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Watch and execute TypeScript processes alongside your Astro development server. Useful for mocking, WebSocket, bundler…",
 	"keywords": [
 		"withastro",
