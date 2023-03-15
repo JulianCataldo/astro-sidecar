@@ -1,6 +1,6 @@
 {
 	"name": "astro-sidecar",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "Watch and execute TypeScript processes alongside your Astro development server. Useful for mocking, WebSocket, bundler…",
 	"keywords": [
 		"withastro",
@@ -11,7 +11,7 @@
 		"server",
 		"development",
 		"tsx",
-		"execa"
+		"concurrently"
 	],
 	"bugs": {
 		"url": "https://github.com/JulianCataldo/astro-sidecar/issues"
