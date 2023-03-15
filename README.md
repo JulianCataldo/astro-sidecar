@@ -148,6 +148,8 @@ for each build / processes…
 
 <div class="git-footer">
 
+---
+
 Other projects:
 
 - [remark-lint-frontmatter-schema](https://github.com/JulianCataldo/remark-lint-frontmatter-schema): Validate your Markdown **frontmatter** data against a **JSON schema**.
