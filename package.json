@@ -40,6 +40,9 @@
 		"concurrently": "^7.6.0",
 		"tsx": "^3.12.5"
 	},
+	"peerDependencies": {
+		"tsx": "^3.12.5"
+	},
 	"devDependencies": {
 		"@types/eslint": "^8.21.2",
 		"@types/html-escaper": "^3.0.0",

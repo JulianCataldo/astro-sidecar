@@ -26,15 +26,22 @@
 
 	import { MOCK_API_DEV_URL } from '../../consts.js';
 
-	const mData = await fetch(MOCK_API_DEV_URL)
-		.then((r) => r.json())
-		.catch((e) => {
-			console.error(e);
-		});
-	console.log({ mData });
+	async function fetchFromREST() {
+		const mData = await fetch(MOCK_API_DEV_URL)
+			.then((r) => r.json())
+			.catch((e) => {
+				console.error(e);
+				return { error: true };
+			});
+		console.log({ mData });
 
-	const msResult = document.querySelector('pre#ms')!;
-	msResult.innerHTML = JSON.stringify(mData);
+		const msResult = document.querySelector('pre#ms')!;
+		msResult.innerHTML = JSON.stringify(mData);
+	}
+
+	setInterval(() => {
+		fetchFromREST();
+	}, 3000);
 </script>
 
 <script>
