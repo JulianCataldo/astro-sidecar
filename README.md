@@ -32,13 +32,13 @@ Add as many sidecar(s) as needed in your `./astro.config.mjs`, you must setup en
 
 ```mjs
 import { defineConfig } from 'astro/config';
-import astroSidecar from 'astro-sidecar';
+import sidecar from 'astro-sidecar';
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
 		//
-		astroSidecar({
+		sidecar({
 			entryPoints: [
 				//
 				'./src/server/websocket.ts',

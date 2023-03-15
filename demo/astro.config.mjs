@@ -1,14 +1,15 @@
 import { defineConfig } from 'astro/config';
-import astroSidecar from 'astro-sidecar';
+import sidecar from 'astro-sidecar';
 
 // https://astro.build/config
 export default defineConfig({
 	server: {
 		port: 5000,
 	},
+
 	integrations: [
 		//
-		astroSidecar({
+		sidecar({
 			entryPoints: [
 				//
 				'./src/server/websocket.ts',
