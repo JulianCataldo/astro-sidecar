@@ -68,11 +68,11 @@ Native **`fetch`** is used for REST API and **SocketIO _client_** for the WebSoc
 
 ---
 
-Web containers:
+Web container:
 
 <div align="center">
 	<a href="https://stackblitz.com/github/JulianCataldo/astro-sidecar/tree/master/demo"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt="Open in StackBlitz"></a>
-	<a href="https://codesandbox.io/s/github/JulianCataldo/astro-sidecar/tree/master/demo"><img src="https://assets.codesandbox.io/github/button-edit-lime.svg" alt="Open with CodeSandbox"></a>
+	<!-- <a href="https://codesandbox.io/s/github/JulianCataldo/astro-sidecar/tree/master/demo"><img src="https://assets.codesandbox.io/github/button-edit-lime.svg" alt="Open with CodeSandbox"></a> -->
 </div>
 
 ---
