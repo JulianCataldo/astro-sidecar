@@ -1,0 +1,71 @@
+---
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro Sidecar(s)</h1>
+
+		<h2>Data from the mocking server (http://localhost:5001)</h2>
+		<pre id="ms">Awaiting data…</pre>
+
+		<hr />
+
+		<h2>Data from the WebSocket server (ws://localhost:5002)</h2>
+		<pre id="ws">Awaiting message…</pre>
+	</body>
+</html>
+
+<script>
+	/* === MOCKING === */
+
+	import { MOCK_API_DEV_URL } from '../../consts.js';
+
+	const mData = await fetch(MOCK_API_DEV_URL)
+		.then((r) => r.json())
+		.catch((e) => {
+			console.error(e);
+		});
+	console.log({ mData });
+
+	const msResult = document.querySelector('pre#ms')!;
+	msResult.innerHTML = JSON.stringify(mData);
+</script>
+
+<script>
+	/* === WEB SOCKET === */
+
+	import { io } from 'socket.io-client';
+	import { WEB_SOCKET_DEV_URL } from '../../consts.js';
+
+	let ioClient: ReturnType<typeof io> | undefined;
+
+	try {
+		ioClient = io(WEB_SOCKET_DEV_URL);
+	} catch (e) {
+		console.error(e);
+	}
+
+	if (ioClient) {
+		ioClient.on('seq-num', (msg) => {
+			console.info(msg);
+
+			const wsResult = document.querySelector('pre#ws')!;
+			wsResult.innerHTML = `seq-num: ${JSON.stringify(msg)}`;
+		});
+	}
+</script>
+
+<style>
+	body {
+		padding: 10vw;
+		background-color: midnightblue;
+		color: white;
+		font-family: system-ui;
+	}
+</style>
