@@ -2,13 +2,13 @@ import type { AstroIntegration } from 'astro';
 
 import path from 'node:path';
 import fs from 'node:fs';
-// import { detect } from 'detect-package-manager';
-import { execa } from 'execa';
+
+import concurrently from 'concurrently';
 
 /* ========================================================================== */
 
 interface Settings {
-	entryPoint: string;
+	entryPoints: string[];
 
 	/**
 	 * @default true
@@ -22,38 +22,44 @@ interface Settings {
 let created = false;
 
 export const integration = ({
-	entryPoint,
+	entryPoints,
 	watch = true,
 }: Settings): AstroIntegration => ({
 	name: 'sidecar',
 
 	hooks: {
 		'astro:server:setup': async (/* { server } */) => {
-			if (!entryPoint) throw Error('Please setup the sidecar entrypoint.');
-			if (!fs.statSync(entryPoint))
-				throw Error(`Incorrect path: ${entryPoint}`);
+			if (!Array.isArray(entryPoints))
+				throw Error('Please setup the sidecar entrypoint.');
 
 			if (created) return;
 			created = true;
 
 			process.env.NODE_NO_WARNINGS = String(1);
 
-			// const packageManagerCommand = await detect();
+			const { result } = concurrently(
+				entryPoints.map((entryPoint) => {
+					if (!fs.statSync(entryPoint))
+						throw Error(`Incorrect path: ${entryPoint}`);
 
-			execa(
-				/* packageManagerCommand */ 'npx',
-				[
-					//
-					'tsx',
-					watch ? 'watch' : '',
-					path.join(process.cwd(), entryPoint),
-				],
+					return {
+						command: `tsx watch ${entryPoint}`,
+						name: path.basename(entryPoint, path.extname(entryPoint)),
+					};
+				}),
 				{
-					all: true,
-					stdio: 'inherit',
-					env: { FORCE_COLOR: String(true) },
+					prefix: 'name',
+					killOthers: ['failure', 'success'],
+					restartTries: 3,
 				},
-			); //.pipeAll?.(process.stdout);
+			);
+			result
+				.then((r) => {
+					// console.log(r);
+				})
+				.catch((e) => {
+					console.error(e);
+				});
 
 			process.env.NODE_NO_WARNINGS = String(0);
 		},
