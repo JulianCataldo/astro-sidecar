@@ -13,7 +13,7 @@ Watch and execute TypeScript processes alongside your Astro development server.
 **Features**:
 
 - **Live reload** of each separate process on file change
-- **WebSocket** TypeScript compilation and execution
+- **TypeScript** compilation and execution
 - Pipe **coloured** terminal outputs to the main one
 
 It uses **`tsx` + `concurrently`** under the hood, and comes as an AstroJS **integration**.
